@@ -2,6 +2,9 @@
   "name": "socket-prototype",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "16.x.x"
+  },
   "type": "module",
   "scripts": {
     "start": "node server.js",
