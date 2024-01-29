@@ -9,7 +9,7 @@ export class Test extends Phaser.Scene {
   create() {
     this.add.text(0, 0, 'Hello World', { color: 'white' });
 
-    const socket = io("http://localhost:3000");
+    const socket = io(import.meta.env.VITE_SERVER_URL);
     socket.on('connect', () => {
       console.log('connected to server: ' + socket.id);
     });
