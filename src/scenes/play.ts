@@ -10,7 +10,7 @@ export class Play extends Phaser.Scene {
         const center_x = this.game.canvas.width / 2;
         const center_y = this.game.canvas.height / 2;
         
-        const game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'cursive', color: 'white', fontSize: '75px'}).setOrigin(0.5);
+        //onst game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'cursive', color: 'white', fontSize: '75px'}).setOrigin(0.5);
         const connecting = this.add.text(center_x, center_y + 150, 'Connecting to Server', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         const loading = this.add.text(center_x, center_y + 200, 'Loading...', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         
