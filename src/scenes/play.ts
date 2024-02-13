@@ -16,7 +16,7 @@ export class Play extends Phaser.Scene {
         
         //this for later
 
-        const glitchURL = "http://scratched-cyclic-washer.glitch.me/";
+        const glitchURL = "https://scratched-cyclic-washer.glitch.me/";
         //const socket = io(import.meta.env.VITE_SERVER_URL);
         const socket = io(glitchURL);
 
