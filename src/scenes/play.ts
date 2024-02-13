@@ -14,14 +14,22 @@ export class Play extends Phaser.Scene {
         const connecting = this.add.text(center_x, center_y + 150, 'Connecting to Server', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         const loading = this.add.text(center_x, center_y + 200, 'Loading...', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         
-        
         //this for later
-        const socket = io(import.meta.env.VITE_SERVER_URL);
+
+        const glitchURL = "http://scratched-cyclic-washer.glitch.me/";
+        //const socket = io(import.meta.env.VITE_SERVER_URL);
+        const socket = io(glitchURL);
+
         socket.on('connect', () => {
-            connecting.setText('Connected to Server!');
+            connecting.setText('Connected to Glitch!');
             loading.setVisible(false);
             console.log('connected to server: ' + socket.id);
         });
+
+        socket.on('users_connected', (count: number) => {
+            this.add.text(center_x, center_y + 250, `Users Online: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
+        });
+
         
     }   
     
