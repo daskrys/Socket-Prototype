@@ -30,13 +30,6 @@ export class Team extends Phaser.Scene {
         this.scene.start('menu'); }
     })
     
-    /*
-    this for later
-    const socket = io(import.meta.env.VITE_SERVER_URL);
-    socket.on('connect', () => {
-      console.log('connected to server: ' + socket.id);
-    });
-    */
     // other server events here
   }
 
