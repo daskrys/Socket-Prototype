@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { io } from 'socket.io-client';
+// /import { io } from 'socket.io-client';
 
 export class Test extends Phaser.Scene {
   constructor() {
