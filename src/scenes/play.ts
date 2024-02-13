@@ -27,7 +27,7 @@ export class Play extends Phaser.Scene {
         });
 
         socket.on('users_connected', (count: number) => {
-            this.add.text(center_x, center_y + 250, `Users Online: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
+            const users = this.add.text(center_x, center_y + 250, `Users Online: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         });
 
         
