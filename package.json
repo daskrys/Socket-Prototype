@@ -2,15 +2,12 @@
   "name": "socket-prototype",
   "private": true,
   "version": "0.0.0",
-  "engines": {
-    "node": "16.x.x"
-  },
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js & vite; fg",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "tsc && vite build"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
