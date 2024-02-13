@@ -1,3 +1,4 @@
+/*
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
@@ -25,3 +26,6 @@ io.on('connection', socket => {
 const port = process.env.PORT || 3000
 server.listen(port, () => console.log('server running on: port ' + port));
 
+*/
+
+// uncomment when using server, gonna deploy client on github pages
