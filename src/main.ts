@@ -7,8 +7,8 @@ import { Play } from './scenes/play';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: '100%',
-  height: '100%',
+  width: '1000',
+  height: '1000',
   physics: {
     default: 'arcade',
     arcade: {
@@ -19,7 +19,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [Team, Menu, Credits, Settings, Play],
   //scene: [Play],
   scale: {
-    mode: Phaser.Scale.ScaleModes.RESIZE,
+    mode: Phaser.AUTO,
     autoCenter: Phaser.Scale.Center.CENTER_BOTH
   }
 };
