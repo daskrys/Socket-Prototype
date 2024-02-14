@@ -17,8 +17,10 @@ export class Play extends Phaser.Scene {
         //this for later
 
         const glitchURL = "https://scratched-cyclic-washer.glitch.me/";
-        //const socket = io(import.meta.env.VITE_SERVER_URL);
+        //const socket = io(import.meta.env.VITE_SERVER_URL); // for local development
         const socket = io(glitchURL);
+
+        let users_textbox: Phaser.GameObjects.Text;
 
         socket.on('connect', () => {
             connecting.setText('Connected to Glitch!');
@@ -27,7 +29,12 @@ export class Play extends Phaser.Scene {
         });
 
         socket.on('users_connected', (count: number) => {
-            const users = this.add.text(center_x, center_y + 250, `Users Online: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
+
+            if (users_textbox) {
+                users_textbox.destroy();
+            }
+            
+            users_textbox = this.add.text(center_x, center_y + 250, `Users Online: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
         });
 
         
