@@ -9,8 +9,15 @@ const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   width: '100%',
   height: '100%',
+  physics: {
+    default: 'arcade',
+    arcade: {
+        gravity: { y: 0 },
+        debug: false
+    }
+  } ,
   scene: [Team, Menu, Credits, Settings, Play],
-  //scene: [Team, Menu, Credits],
+  //scene: [Play],
   scale: {
     mode: Phaser.Scale.ScaleModes.RESIZE,
     autoCenter: Phaser.Scale.Center.CENTER_BOTH
