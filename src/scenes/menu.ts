@@ -1,6 +1,5 @@
 import * as Phaser from 'phaser';
 import dragonURL from '/assets/8_bit_dragon.png';
-import titleURL from '/assets/bsd-2.png';
 
 const settings: string = 'SETTINGS';
 const credits: string = 'CREDITS';
@@ -14,15 +13,14 @@ export class Menu extends Phaser.Scene {
     preload() { 
         // load assets here    
         this.load.image('dragon', dragonURL);
-        this.load.image('title', titleURL);
     }
 
     create() {
 
-        this.cameras.main.setBackgroundColor(0x000000); // sets background color change later
+        this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
 
         const center_x = this.game.canvas.width / 2;
-        const center_y = this.game.canvas.height / 2;
+        const center_y = this.game.canvas.height / 2; 
     
         const game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '55px'}).setOrigin(0.5);
         //const title_image = this.add.image(center_x, center_y - 80, 'title').setScale(.75).setOrigin(0.5);

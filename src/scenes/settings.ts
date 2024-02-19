@@ -6,6 +6,7 @@ export class Settings extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.setBackgroundColor(0x141413);
     const center_x = this.game.canvas.width / 2;
     const center_y = this.game.canvas.height / 2;
     
