@@ -10,8 +10,8 @@ export class Team extends Phaser.Scene {
     const center_x = this.game.canvas.width / 2;
     const center_y = this.game.canvas.height / 2;
     
-    const team_intro = this.add.text(center_x, center_y, 'Team 24', { fontFamily: 'cursive' ,color: 'white', fontSize: '50px'}).setOrigin(0.5);
-    const game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'cursive', color: 'white', fontSize: '75px'}).setOrigin(0.5);
+    const team_intro = this.add.text(center_x, center_y, 'Team 24', { fontFamily: 'Silkscreen' ,color: '#D3B02C', fontSize: '50px'}).setOrigin(0.5);
+    const game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '55px'}).setOrigin(0.5);
 
     this.tweens.add({ 
       targets: [game_name],
