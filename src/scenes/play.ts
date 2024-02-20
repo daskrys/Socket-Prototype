@@ -40,6 +40,7 @@ export class Play extends Phaser.Scene {
     
     create() {
         this.animatePlayer();
+        this.cameras.main.setBackgroundColor(0x141413);
 
         this.center_x = this.game.canvas.width / 2;
         this.center_y = this.game.canvas.height / 2;
