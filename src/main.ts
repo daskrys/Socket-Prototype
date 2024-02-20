@@ -20,14 +20,13 @@ const config: Phaser.Types.Core.GameConfig = {
     }
   },
   scene: [Team, Menu, Credits, Settings, Play],
-  //scene: [Menu],
+  //scene: [Settings],
   scale: {
     mode: Phaser.AUTO,
     autoCenter: Phaser.Scale.Center.CENTER_BOTH
   }
 };
 
-// this for adding google fonts o project
 WebFont.load({
   google: {
     families: ['Bangers', 'MedievalSharp', 'Silkscreen']

@@ -1,23 +1,30 @@
 import * as Phaser from 'phaser';
 import dragonURL from '/assets/8_bit_dragon.png';
-
-const settings: string = 'SETTINGS';
-const credits: string = 'CREDITS';
-const join_room: string = 'JOIN ROOM';
+import englishURL from '/assets/en.json?url';
+import notEnglishURL from '/assets/lang.json?url';
 
 export class Menu extends Phaser.Scene { 
+
+    english: any;
+    not_english: any;
+    language: any;
+
     constructor() {
         super('menu');
     }   
 
     preload() { 
-        // load assets here    
         this.load.image('dragon', dragonURL);
+        this.load.json('english', englishURL);
+        this.load.json('not_english', notEnglishURL);
     }
 
     create() {
-
         this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
+
+        this.english = this.cache.json.get('english');
+        this.not_english = this.cache.json.get('not_english');
+        this.setLanguage(); // set language
 
         const center_x = this.game.canvas.width / 2;
         const center_y = this.game.canvas.height / 2; 
@@ -45,19 +52,19 @@ export class Menu extends Phaser.Scene {
             repeat: -1
         });
 
-        const join_button = this.add.text(center_x, center_y + 150, join_room, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
+        const join_button = this.add.text(center_x, center_y + 150, this.language.join_room, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         join_button.setInteractive();
         join_button.on('pointerover', () => { join_button.setColor('#FFF'); });
         join_button.on('pointerout', () => { join_button.setColor('#E5A90A'); });
         join_button.on('pointerdown', () => { this.scene.start('play'); });
 
-        const settings_button = this.add.text(center_x, center_y + 200, settings, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
+        const settings_button = this.add.text(center_x, center_y + 200, this.language.settings, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         settings_button.setInteractive();
         settings_button.on('pointerover', () => { settings_button.setColor('#FFF'); });
         settings_button.on('pointerout', () => { settings_button.setColor('#E5A90A'); });
         settings_button.on('pointerdown', () => { this.scene.start('settings'); });
 
-        const credits_button = this.add.text(center_x, center_y + 250, credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
+        const credits_button = this.add.text(center_x, center_y + 250, this.language.credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         credits_button.setInteractive();
         credits_button.on('pointerover', () => { credits_button.setColor('#FFF'); });
         credits_button.on('pointerout', () => { credits_button.setColor('#E5A90A'); });
@@ -66,7 +73,18 @@ export class Menu extends Phaser.Scene {
        
     }
 
-    update() {
-        
+    setLanguage() {
+        if(localStorage.getItem('language')!) { 
+        let get_lang = localStorage.getItem('language')!;
+        if(get_lang === 'not_english') {
+            this.language = this.not_english;
+            } else {
+            this.language = this.english;
+        }
+        } else {
+        this.language = this.english;
+        }
     }
+
+    update() {}
 }

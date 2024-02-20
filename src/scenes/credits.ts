@@ -1,8 +1,19 @@
 import * as Phaser from 'phaser';
+import englishURL from '/assets/en.json?url';
+import notEnglishURL from '/assets/lang.json?url';
 
 export class Credits extends Phaser.Scene {
+  english: any;
+  not_english: any;
+  language: any;
+
   constructor() {
     super('credits');
+  }
+
+  preload() {
+    this.load.json('english', englishURL);
+    this.load.json('not_english', notEnglishURL);
   }
 
   create() {
@@ -10,10 +21,14 @@ export class Credits extends Phaser.Scene {
     const center_x = this.game.canvas.width / 2;
     const center_y = this.game.canvas.height / 2;
     
+    this.english = this.cache.json.get('english');
+    this.not_english = this.cache.json.get('not_english');
+    this.setLanguage(); // set language
+    
     const team_name_str = "Production Lead\nVincent Kurniadjaja\n\nEngine Lead\nSooin Jung\n\nDesign Lead\nLouis Lim\n\nTesting Lead\nChristian Perez\n";
 
-    const team_names = this.add.text(center_x, center_y, team_name_str, { fontFamily: 'Bangers' ,color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
-    const credits_intro = this.add.text(center_x, center_y, 'Credits', { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '60px'}).setOrigin(0.5);
+    this.add.text(center_x, center_y, team_name_str, { fontFamily: 'Bangers' ,color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
+    const credits_intro = this.add.text(center_x, center_y, this.language.credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '60px'}).setOrigin(0.5);
 
     this.tweens.add({ 
       targets: [credits_intro],
@@ -22,16 +37,23 @@ export class Credits extends Phaser.Scene {
       ease: 'Power2',
     });
 
-    this.tweens.add({
-      targets: [credits_intro, team_names],
-      alpha: 0,
-      duration: 10000,
-      onComplete: () => { 
-        this.scene.start('menu'); } // for now just return to main menu after 15 seconds
-    })
+    const back_button = this.add.text(center_x, center_y + 300, '←', { fontFamily: 'Bangers', color: '#D3B02C', fontSize: '85px'}).setOrigin(0.5);
+    back_button.setInteractive();
+    back_button.on('pointerover', () => { back_button.setColor('#FFF'); });
+    back_button.on('pointerout', () => { back_button.setColor('#E5A90A'); });
+    back_button.on('pointerdown', () => { this.scene.start('menu'); });
   }
 
-  update() {
-    // game logic here
+  setLanguage() {
+    if(localStorage.getItem('language')!) { 
+    let get_lang = localStorage.getItem('language')!;
+    if(get_lang === 'not_english') {
+        this.language = this.not_english;
+        } else {
+        this.language = this.english;
+    }
+    } else {
+    this.language = this.english;
+    }
   }
 }
