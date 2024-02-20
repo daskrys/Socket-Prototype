@@ -40,7 +40,7 @@ export class Credits extends Phaser.Scene {
     const back_button = this.add.text(center_x, center_y + 300, '←', { fontFamily: 'Bangers', color: '#D3B02C', fontSize: '85px'}).setOrigin(0.5);
     back_button.setInteractive();
     back_button.on('pointerover', () => { back_button.setColor('#FFF'); });
-    back_button.on('pointerout', () => { back_button.setColor('#E5A90A'); });
+    back_button.on('pointerout', () => { back_button.setColor('#D3B02C'); });
     back_button.on('pointerdown', () => { this.scene.start('menu'); });
   }
 

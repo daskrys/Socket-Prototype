@@ -2,8 +2,13 @@ import * as Phaser from 'phaser';
 import { io } from 'socket.io-client';
 import spriteURL from '/assets/_Run.png';
 import spriteMapURL from '/assets/sprites.json?url';
+import englishURL from '/assets/en.json?url';
+import notEnglishURL from '/assets/lang.json?url';
 
 export class Play extends Phaser.Scene {
+    english: any;
+    not_english: any;
+    language: any;
 
     connected: boolean = false;
     player_number: number = 0;
@@ -18,12 +23,15 @@ export class Play extends Phaser.Scene {
     players: any = {};
 
     glitchURL = "https://scratched-cyclic-washer.glitch.me/";
+    //glitchURL = "";
     //socket = io(import.meta.env.VITE_SERVER_URL); // for local development
     socket: any;
 
     preload() { 
         this.load.image('player', spriteURL);
         this.load.atlas('player_atlas', spriteURL, spriteMapURL);
+        this.load.json('english', englishURL);
+        this.load.json('not_english', notEnglishURL);
     }
 
     constructor() {
@@ -36,10 +44,14 @@ export class Play extends Phaser.Scene {
         this.center_x = this.game.canvas.width / 2;
         this.center_y = this.game.canvas.height / 2;
         this.cursors = this.input.keyboard!.createCursorKeys();
+
+        this.english = this.cache.json.get('english');
+        this.not_english = this.cache.json.get('not_english');
+        this.setLanguage(); // set language
         
         //onst game_name = this.add.text(center_x, center_y - 80, 'Bite-Sized Dungeons', { fontFamily: 'cursive', color: 'white', fontSize: '75px'}).setOrigin(0.5);
-        const connecting = this.add.text(this.center_x, this.center_y + 150, 'Connecting to Server', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
-        const loading = this.add.text(this.center_x, this.center_y + 200, 'Loading...', { fontFamily: 'cursive', color: 'white', fontSize: '50px'}).setOrigin(0.5);
+        const connecting = this.add.text(this.center_x, this.center_y + 150, this.language.connecting, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '50px'}).setOrigin(0.5);
+        const loading = this.add.text(this.center_x, this.center_y + 200, this.language.loading, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '50px'}).setOrigin(0.5);
 
         //const glitchURL = "https://scratched-cyclic-washer.glitch.me/";
         //const socket = io(import.meta.env.VITE_SERVER_URL); // for local development
@@ -50,7 +62,7 @@ export class Play extends Phaser.Scene {
 
         // connect to server
         this.socket.on('connect', () => {
-            connecting.setText('Connected to Glitch!');
+            connecting.setText(this.language.connected);
             setTimeout(() => { connecting.destroy(); }, 2000);
 
             loading.setVisible(false);
@@ -76,7 +88,7 @@ export class Play extends Phaser.Scene {
                 player_textbox.destroy();
             }
 
-            player_textbox = this.add.text(this.center_x!, this.center_y! - 80, `Player ${this.player_number}`, { fontFamily: 'cursive', color: 'white', fontSize: '60px'}).setOrigin(0.5);
+            player_textbox = this.add.text(this.center_x!, this.center_y! - 80, `Player ${this.player_number}`, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '60px'}).setOrigin(0.5);
             
             setTimeout(() => { 
                 this.tweens.add({ 
@@ -104,7 +116,7 @@ export class Play extends Phaser.Scene {
 
             this.player_number = count;
 
-            users_textbox = this.add.text(this.center_x!, 50, `Players Connected: ${count}`, { fontFamily: 'cursive', color: 'white', fontSize: '25px'}).setOrigin(0.5);
+            users_textbox = this.add.text(this.center_x!, 50, `Players Connected: ${count}`, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '25px'}).setOrigin(0.5);
             
         });
         
@@ -211,5 +223,18 @@ export class Play extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
+    }
+
+    setLanguage() {
+        if(localStorage.getItem('language')!) { 
+        let get_lang = localStorage.getItem('language')!;
+        if(get_lang === 'not_english') {
+            this.language = this.not_english;
+            } else {
+            this.language = this.english;
+        }
+        } else {
+            this.language = this.english;
+        }
     }
 }

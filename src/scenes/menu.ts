@@ -55,22 +55,20 @@ export class Menu extends Phaser.Scene {
         const join_button = this.add.text(center_x, center_y + 150, this.language.join_room, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         join_button.setInteractive();
         join_button.on('pointerover', () => { join_button.setColor('#FFF'); });
-        join_button.on('pointerout', () => { join_button.setColor('#E5A90A'); });
+        join_button.on('pointerout', () => { join_button.setColor('#D3B02C'); });
         join_button.on('pointerdown', () => { this.scene.start('play'); });
 
         const settings_button = this.add.text(center_x, center_y + 200, this.language.settings, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         settings_button.setInteractive();
         settings_button.on('pointerover', () => { settings_button.setColor('#FFF'); });
-        settings_button.on('pointerout', () => { settings_button.setColor('#E5A90A'); });
+        settings_button.on('pointerout', () => { settings_button.setColor('#D3B02C'); });
         settings_button.on('pointerdown', () => { this.scene.start('settings'); });
 
         const credits_button = this.add.text(center_x, center_y + 250, this.language.credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         credits_button.setInteractive();
         credits_button.on('pointerover', () => { credits_button.setColor('#FFF'); });
-        credits_button.on('pointerout', () => { credits_button.setColor('#E5A90A'); });
+        credits_button.on('pointerout', () => { credits_button.setColor('#D3B02C'); });
         credits_button.on('pointerdown', () => { this.scene.start('credits'); });
-
-       
     }
 
     setLanguage() {
