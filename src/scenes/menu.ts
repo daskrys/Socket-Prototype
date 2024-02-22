@@ -2,7 +2,6 @@ import * as Phaser from 'phaser';
 import dragonURL from '/assets/8_bit_dragon.png';
 import englishURL from '/assets/en.json?url';
 import notEnglishURL from '/assets/lang.json?url';
-import menuBGM from '/assets/byte_menu.mp3';
 import btnHov from '/assets/btn_hover.mp3';
 
 export class Menu extends Phaser.Scene { 
@@ -19,16 +18,12 @@ export class Menu extends Phaser.Scene {
         this.load.image('dragon', dragonURL);
         this.load.json('english', englishURL);
         this.load.json('not_english', notEnglishURL);
-        this.load.audio('menuBGM', menuBGM);
         this.load.audio('btnHov', btnHov);
     }
 
     create() {
         this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
-        const bgm = this.sound.add('menuBGM');
         const hover = this.sound.add('btnHov');
-        bgm.setLoop(true);
-        bgm.play();
         this.english = this.cache.json.get('english');
         this.not_english = this.cache.json.get('not_english');
         this.setLanguage(); // set language
