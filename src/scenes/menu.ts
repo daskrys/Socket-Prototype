@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import dragonURL from '/assets/8_bit_dragon.png';
 import englishURL from '/assets/en.json?url';
 import notEnglishURL from '/assets/lang.json?url';
+import menuBGM from '/assets/byte_menu.mp3';
+import btnHov from '/assets/btn_hover.mp3';
 
 export class Menu extends Phaser.Scene { 
 
@@ -17,11 +19,16 @@ export class Menu extends Phaser.Scene {
         this.load.image('dragon', dragonURL);
         this.load.json('english', englishURL);
         this.load.json('not_english', notEnglishURL);
+        this.load.audio('menuBGM', menuBGM);
+        this.load.audio('btnHov', btnHov);
     }
 
     create() {
         this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
-
+        const bgm = this.sound.add('menuBGM');
+        const hover = this.sound.add('btnHov');
+        bgm.setLoop(true);
+        bgm.play();
         this.english = this.cache.json.get('english');
         this.not_english = this.cache.json.get('not_english');
         this.setLanguage(); // set language
@@ -54,19 +61,19 @@ export class Menu extends Phaser.Scene {
 
         const join_button = this.add.text(center_x, center_y + 150, this.language.join_room, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         join_button.setInteractive();
-        join_button.on('pointerover', () => { join_button.setColor('#FFF'); });
+        join_button.on('pointerover', () => { join_button.setColor('#FFF'); hover.play(); });
         join_button.on('pointerout', () => { join_button.setColor('#D3B02C'); });
         join_button.on('pointerdown', () => { this.scene.start('play'); });
 
         const settings_button = this.add.text(center_x, center_y + 200, this.language.settings, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         settings_button.setInteractive();
-        settings_button.on('pointerover', () => { settings_button.setColor('#FFF'); });
+        settings_button.on('pointerover', () => { settings_button.setColor('#FFF'); hover.play(); });
         settings_button.on('pointerout', () => { settings_button.setColor('#D3B02C'); });
         settings_button.on('pointerdown', () => { this.scene.start('settings'); });
 
         const credits_button = this.add.text(center_x, center_y + 250, this.language.credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
         credits_button.setInteractive();
-        credits_button.on('pointerover', () => { credits_button.setColor('#FFF'); });
+        credits_button.on('pointerover', () => { credits_button.setColor('#FFF'); hover.play(); });
         credits_button.on('pointerout', () => { credits_button.setColor('#D3B02C'); });
         credits_button.on('pointerdown', () => { this.scene.start('credits'); });
     }
