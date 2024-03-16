@@ -25,7 +25,7 @@ export class Credits extends Phaser.Scene {
     this.not_english = this.cache.json.get('not_english');
     this.setLanguage(); // set language
     
-    const team_name_str = "Production Lead\nVincent Kurniadjaja\n\nEngine Lead\nSooin Jung\n\nDesign Lead\nLouis Lim\n\nTesting Lead\nChristian Perez\n";
+    const team_name_str = "Programmer - Christian Perez\n Music - Louis Lim\n";
 
     this.add.text(center_x, center_y, team_name_str, { fontFamily: 'Bangers' ,color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
     const credits_intro = this.add.text(center_x, center_y, this.language.credits, { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '60px'}).setOrigin(0.5);
